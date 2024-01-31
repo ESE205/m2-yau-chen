@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+from time import sleep
 import sys
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
