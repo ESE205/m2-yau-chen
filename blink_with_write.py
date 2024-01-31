@@ -22,9 +22,9 @@ with open('data.txt','w') as data:
             TIME = int(input("Input Time: "))
             while TIME > 0:                         # Run TIME seconds
                 TIME -= BlinkRate * 2                # Decrement counter
-                GPIO.output(pin1, GPIO.HIGH)         # Turn on
+                GPIO.output(LED_PIN, GPIO.HIGH)         # Turn on
                 sleep(BlinkRate)                     # Sleep for 1 second
-                GPIO.output(pin1, GPIO.LOW)          # Turn off
+                GPIO.output(LED_PIN, GPIO.LOW)          # Turn off
                 sleep(BlinkRate)                     # Sleep for 1 second
                 data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
                 if DEBUG:
