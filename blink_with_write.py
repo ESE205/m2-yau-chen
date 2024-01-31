@@ -18,22 +18,21 @@ GPIO.setup(INPUT_PIN,GPIO.IN)
 GPIO.setup(LED_PIN, GPIO.OUT, initial = GPIO.LOW)
 
 with open('data.txt','w') as data:
-    while i == 0:
-        if not GPIO.input(INPUT_PIN):
-            BlinkRate = int(input("Input Blink Rate: "))
-            TIME = int(input("Input Time: "))
-            while TIME > 0:                         # Run TIME seconds
-                TIME -= BlinkRate                # Decrement counter
-                GPIO.output(LED_PIN, GPIO.HIGH)         # Turn on
-                sleep(BlinkRate/2)                     # Sleep for 1 second
-                LED_IS_ON = not LED_IS_ON
-                data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
-                GPIO.output(LED_PIN, GPIO.LOW)          # Turn off
-                sleep(BlinkRate/2)                     # Sleep for 1 second
-                LED_IS_ON = not LED_IS_ON
-                data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
-                if DEBUG:
-                    print("Led is on: {LED_IS_ON}")
-        else:
-            GPIO.output(LED_PIN, False)
+    if not GPIO.input(INPUT_PIN):
+        BlinkRate = int(input("Input Blink Rate: "))
+        TIME = int(input("Input Time: "))
+        while TIME > 0:                         # Run TIME seconds
+            TIME -= BlinkRate                # Decrement counter
+            GPIO.output(LED_PIN, GPIO.HIGH)         # Turn on
+            sleep(BlinkRate/2)                     # Sleep for 1 second
+            LED_IS_ON = not LED_IS_ON
+            data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
+            GPIO.output(LED_PIN, GPIO.LOW)          # Turn off
+            sleep(BlinkRate/2)                     # Sleep for 1 second
+            LED_IS_ON = not LED_IS_ON
+            data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
+            if DEBUG:
+                print("Led is on: {LED_IS_ON}")
+    else:
+        GPIO.output(LED_PIN, False)
 GPIO.cleanup()
