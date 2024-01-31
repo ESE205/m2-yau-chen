@@ -1,18 +1,33 @@
-import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
-from time import sleep     # Import the sleep from time module
-GPIO.setwarnings(False)    # Ignore warning for now
-GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
+import RPi.GPIO as GPIO
+from time import sleep
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
 
 ITER_COUNT = 15
 INPUT_PIN = 11
 LED_PIN = 16
-i = 0   
+i = 0
 
+DEBUG = False
+if '-debug' in sys.argv:
+    DEBUG = True
 GPIO.setup(INPUT_PIN,GPIO.IN)
 GPIO.setup(LED_PIN, GPIO.OUT, initial = GPIO.LOW)
-while i == 0:
-    if not GPIO.input(INPUT_PIN):
-        GPIO.output(LED_PIN, True)
-    else:
-        GPIO.output(LED_PIN, False)
+
+with open('data.txt','w') as data:
+    while i == 0:
+        if not GPIO.input(INPUT_PIN):
+            BlinkRate = input("Input Blink Rate: ")
+            TIME = input("Input Time: ")
+            while TIME > 0:                         # Run TIME seconds
+                TIME -= BlinkRate * 2                # Decrement counter
+                GPIO.output(pin1, GPIO.HIGH)         # Turn on
+                sleep(BlinkRate)                     # Sleep for 1 second
+                GPIO.output(pin1, GPIO.LOW)          # Turn off
+                sleep(BlinkRate)                     # Sleep for 1 second
+                data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
+                if DEBUG:
+                    print("Led is on: {LED_IS_ON}")
+        else:
+            GPIO.output(LED_PIN, False)
 GPIO.cleanup()
