@@ -4,15 +4,18 @@ from time import sleep     # Import the sleep from time module
 GPIO.setwarnings(False)    # Ignore warning for now
 GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
 
-ITER_COUNT = 15  
-pin1 = 16
+ITER_COUNT = 15
+INPUT_PIN = 11
+LED_PIN = 16
+i = 0
 
 GPIO.setup(pin1, GPIO.OUT, initial=GPIO.LOW)   
 
-while ITER_COUNT > 0: # Run ITER_COUNT times
-   ITER_COUNT -= 1 # Decrement counter
-   GPIO.output(pin1, GPIO.HIGH) # Turn on
-   sleep(1)                     # Sleep for 1 second
-   GPIO.output(pin1, GPIO.LOW)  # Turn off
-   sleep(1)                     # Sleep for 1 second
+GPIO.setup(INPUT_PIN,GPIO.IN)
+GPIO.setup(LED_PIN, GPIO.OUT, initial = GPIO.LOW)
+while i = 0:
+    if !GPIO.input(INTPUT_PIN):
+        GPIO.output(LED_PIN, true)
+    else:
+        GPIO.output(LED_PIN, false)
 GPIO.cleanup()
