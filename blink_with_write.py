@@ -8,6 +8,7 @@ GPIO.setmode(GPIO.BOARD)
 ITER_COUNT = 15
 INPUT_PIN = 11
 LED_PIN = 16
+LED_IS_ON = False
 i = 0
 
 DEBUG = False
@@ -25,8 +26,11 @@ with open('data.txt','w') as data:
                 TIME -= BlinkRate * 2                # Decrement counter
                 GPIO.output(LED_PIN, GPIO.HIGH)         # Turn on
                 sleep(BlinkRate)                     # Sleep for 1 second
+                LED_IS_ON = not LED_IS_ON
+                data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
                 GPIO.output(LED_PIN, GPIO.LOW)          # Turn off
                 sleep(BlinkRate)                     # Sleep for 1 second
+                LED_IS_ON = not LED_IS_ON
                 data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
                 if DEBUG:
                     print("Led is on: {LED_IS_ON}")
