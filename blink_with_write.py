@@ -18,8 +18,8 @@ GPIO.setup(LED_PIN, GPIO.OUT, initial = GPIO.LOW)
 with open('data.txt','w') as data:
     while i == 0:
         if not GPIO.input(INPUT_PIN):
-            BlinkRate = input("Input Blink Rate: ")
-            TIME = input("Input Time: ")
+            BlinkRate = int(input("Input Blink Rate: "))
+            TIME = int(input("Input Time: "))
             while TIME > 0:                         # Run TIME seconds
                 TIME -= BlinkRate * 2                # Decrement counter
                 GPIO.output(pin1, GPIO.HIGH)         # Turn on
