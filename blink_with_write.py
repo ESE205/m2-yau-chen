@@ -23,13 +23,13 @@ with open('data.txt','w') as data:
             BlinkRate = int(input("Input Blink Rate: "))
             TIME = int(input("Input Time: "))
             while TIME > 0:                         # Run TIME seconds
-                TIME -= BlinkRate * 2                # Decrement counter
+                TIME -= BlinkRate                # Decrement counter
                 GPIO.output(LED_PIN, GPIO.HIGH)         # Turn on
-                sleep(BlinkRate)                     # Sleep for 1 second
+                sleep(BlinkRate/2)                     # Sleep for 1 second
                 LED_IS_ON = not LED_IS_ON
                 data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
                 GPIO.output(LED_PIN, GPIO.LOW)          # Turn off
-                sleep(BlinkRate)                     # Sleep for 1 second
+                sleep(BlinkRate/2)                     # Sleep for 1 second
                 LED_IS_ON = not LED_IS_ON
                 data.write(f'{time.time():1.0f} {LED_IS_ON}\n')
                 if DEBUG:
